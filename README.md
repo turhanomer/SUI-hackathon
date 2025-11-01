@@ -229,3 +229,4 @@ Sorularınız için GitHub Issues kullanın.
 ---
 
 **Not**: Bu proje aktif geliştirme aşamasındadır. Production kullanımından önce kapsamlı güvenlik denetimi yapılmalıdır.
+"# hackathon" 
