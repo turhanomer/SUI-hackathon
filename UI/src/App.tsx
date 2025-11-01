@@ -1,38 +1,37 @@
-import { ConnectButton } from "@mysten/dapp-kit";
-import { Box, Container, Flex, Heading } from "@radix-ui/themes";
-import { WalletStatus } from "./WalletStatus";
+import { Routes, Route, Navigate } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import PollsPage from "./pages/PollsPage";
+import ProfilePage from "./pages/ProfilePage";
+import CreatePollPage from "./pages/CreatePollPage";
+import VotePage from "./pages/VotePage";
+import AboutPage from "./pages/AboutPage";
+import SettingsPage from "./pages/SettingsPage";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { useEffect } from "react";
+import { seedIfEmpty } from "./utility/seed";
 
 function App() {
+  useEffect(() => {
+    seedIfEmpty();
+  }, []);
   return (
-    <>
-      <Flex
-        position="sticky"
-        px="4"
-        py="2"
-        justify="between"
-        style={{
-          borderBottom: "1px solid var(--gray-a2)",
-        }}
-      >
-        <Box>
-          <Heading>dApp Starter Template</Heading>
-        </Box>
-
-        <Box>
-          <ConnectButton />
-        </Box>
-      </Flex>
-      <Container>
-        <Container
-          mt="5"
-          pt="2"
-          px="4"
-          style={{ background: "var(--gray-a2)", minHeight: 500 }}
-        >
-          <WalletStatus />
-        </Container>
-      </Container>
-    </>
+    <div className="app">
+      <Navbar />
+      <div className="app-main">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/polls" element={<PollsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/create" element={<CreatePollPage />} />
+          <Route path="/vote/:id" element={<VotePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
   );
 }
 
